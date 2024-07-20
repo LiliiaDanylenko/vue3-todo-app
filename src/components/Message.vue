@@ -1,12 +1,20 @@
 <script>
 export default {
-  props: {
-    active: Boolean,
+  // props: {
+  //   active: Boolean,
+  // },
+  // emits: ['hide'],
+  data() {
+    return {
+      text: '',
+    }
   },
-  emits: ['hide'],
   methods: {
     hide() {
-      this.$emit('hide')
+      this.text = '';
+    },
+    show(text) {
+      this.text = text;
     }
   }
 }
@@ -15,7 +23,7 @@ export default {
 <template>
   <article
     class="message"
-    :class="{ 'message--hidden': !active }"
+    :class="{ 'message--hidden': !text }"
   >
     <div class="message-header">
       <slot name="header"></slot>
@@ -24,7 +32,7 @@ export default {
     </div>
 
     <div class="message-body">
-      <slot></slot>
+      <slot :text="text">Message</slot>
     </div>
   </article>
 </template>

@@ -2,7 +2,7 @@ import { client } from "@/utils/httpClient"
 
 export const getTodos = () => {
   return client.get('/todos?userId=11253')
-  .then(() => Promise.reject())
+  // .then(() => Promise.reject())
 }
 
 export const createTodo = (title) => {

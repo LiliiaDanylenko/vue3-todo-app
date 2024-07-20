@@ -60,7 +60,7 @@ export default {
         this.todos = data;
       })
       .catch(() => {
-        this.errorMessage = 'Unable to load todos';
+        this.$refs.errorMessage.show('Unable to load todos');
       })
   },
   methods: {
@@ -72,7 +72,7 @@ export default {
           this.title = '';
         })
         .catch(() => {
-          this.errorMessage = 'Unable to create todo';
+          this.$refs.errorMessage.show('Unable to create todo');
         })
     },
     updateTodo({ id, title, completed }) {
@@ -83,7 +83,7 @@ export default {
           );
         })
         .catch(() => {
-          this.errorMessage = 'Unable to update todo';
+          this.$refs.errorMessage.show('Unable to update todo');
         })
     },
     deleteTodo(todoId) {
@@ -92,7 +92,7 @@ export default {
           this.todos = this.todos.filter(todo => todo.id !== todoId);
         })
         .catch(() => {
-          this.errorMessage = 'Unable to delete todo';
+          this.$refs.errorMessage.show('Unable to delete todo');
         })
     },
     toggleAll() {
@@ -106,7 +106,7 @@ export default {
               );
             })
             .catch(() => {
-              this.errorMessage = 'Unable to toggle todos';
+              this.$refs.errorMessage.show('Unable to toggle todos');
             })
         })
       } else {
@@ -119,7 +119,7 @@ export default {
               );
             })
             .catch(() => {
-              this.errorMessage = 'Unable to toggle todos';
+              this.$refs.errorMessage.show('Unable to toggle todos');
             })
         })
       }
@@ -132,7 +132,7 @@ export default {
               this.todos = this.todos.filter(activeTodo => activeTodo.id !== todo.id);
             })
             .catch(() => {
-              this.errorMessage = 'Unable to delete completed todos';
+              this.$refs.errorMessage.show('Unable to delete completed todos');
             })
         }
       })
@@ -189,11 +189,10 @@ export default {
 
     <Message
       class="is-danger"
-      :active="errorMessage !== ''"
-      @hide="errorMessage = ''"
+      ref="errorMessage"
     >
-      <template #default>
-        <p>{{ errorMessage }}</p>
+      <template #default="{ text }">
+        <p>{{ text }}</p>
       </template>
       <!-- <p>{{ errorMessage }}</p> // те саме -->
 
